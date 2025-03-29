@@ -13,13 +13,19 @@
 <body>
 
     <main class="content">
+        <h3 class="score">Score: <span id="score">0</span></h3>
         <div class="game-container">
             <h2 class="game-title">Word Scramble</h2>
             <h1 id="wordContainer" class="word-container"></h1>
             <h3 class="timer-container">Time Left: <span id="timer">60s</span></h3>
-            <input type="text" placeholder="Enter a valid word">
-            <button id="RefreshWord">Refresh Word</button>
-            <button id="CheckWord">Check Word</button>
+            
+            <div class="user-inputs">
+                <input id="UnscrambledWord" class="unscramble-input" type="text" placeholder="Enter a valid word">
+                <div class="buttons">
+                    <button class="button" id="refreshWord">Refresh Word</button>
+                    <button class="button check" id="CheckBtn">Check Word</button>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -28,6 +34,11 @@
     
     <script src="app/js/createGame.js"></script>
     <script src="app/js/runGame.js"></script>
+    <script src="app/js/generateNewWord.js"></script>
+    <script src="app/js/scoreTracker.js"></script>
+    <script src="app/js/checkWord.js"></script>
+    <script src="app/js/refreshWord.js"></script>
+
     <script src="app/js/main.js"></script>
 </body>
 </html>

@@ -39,3 +39,57 @@
 #timer {
     font-weight: bold;
 }
+
+.user-inputs {
+    width: 100%;
+    min-height: 100px;
+    padding: 15px;
+}
+
+.unscramble-input {
+    width: 100%;
+    border: none;
+    border: 1px solid grey;
+    outline: none;
+    background-color: none;
+    font-size: 1.2rem;
+    padding: 15px;
+    border-radius: 12px;
+}
+
+.buttons {
+    min-height: 100px;
+    padding-top: 15px;
+    display: flex;
+    margin-right: -15px;
+}
+
+.button {
+    width: 100%;
+    height: 50px;
+    background-color: grey;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 12px;
+    border: none;
+    outline: none;
+    font-size: 1.2rem;
+    margin-right: 15px;
+    transition: .3s;
+}
+
+/* .button:active {
+    background-color: red;
+} */
+
+.check {
+    background-color: #1b9b1d;
+}
+
+.score {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    color: #fff;
+    font-size: 1.2rem;
+}

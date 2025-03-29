@@ -1,15 +1,4 @@
-let words;
-let chosenWord;
-let currentScore = 0;
-
-let wordContainer = document.getElementById('wordContainer');
-
-let timerContainer = document.getElementById('timer');
-
-pickWord();
-setTimer();
-
-function pickWord() {
+function pickNewWord() {
 
     $.getJSON('app/js/words.json', function (response) {
         words = response;
@@ -27,13 +16,13 @@ function pickWord() {
         let chosenWordRaw = words[randWordIndex];
         chosenWord = chosenWordRaw.toUpperCase(1);
 
-        setWord(chosenWord);
+        setNewWord(chosenWord);
     });
 }
 
 // this function shuffles the letters to make the game cool
 
-function shuffleLetters(array) {
+function shuffleNewLetters(array) {
   let currentIndex = array.length;
 
   // While there remain elements to shuffle...
@@ -49,10 +38,14 @@ function shuffleLetters(array) {
   }
 }
 
-function setWord(chosenWord) {
+function setNewWord(chosenWord) {
     let letters = chosenWord.split("");
 
-    shuffleLetters(letters);
+    shuffleNewLetters(letters);
+
+    for (let i = 0; i < wordContainer.children.length; i++) {
+        wordContainer.children[i].remove();
+    }
 
     // creates all the letters seperately and scrambles them
 
@@ -63,21 +56,4 @@ function setWord(chosenWord) {
         
         wordContainer.appendChild(letter);
     }
-}
-
-function setTimer() {
-    let timer = 60;
-
-    setInterval(() => {
-        if(timer <= 0) {
-            gameRunning = false;
-        } else {
-            timer--;
-
-            if(timer <= 0)
-                timerContainer.parentElement.classList.add('times-up');
-
-            timerContainer.innerText = timer + 's';
-        }
-    }, 1000);
 }
