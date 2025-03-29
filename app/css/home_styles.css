@@ -1,0 +1,41 @@
+.game-container {
+    width: 100%;
+    max-width: 500px;
+    min-height: 450px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 5px 50px #000;
+    padding: 15px;
+}
+
+.game-title {
+    width: 100%;
+    height: 60px;
+    border-bottom: 1px solid grey;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 15px;
+}
+
+.word-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 15px;
+}
+
+.times-up {
+    color: red;
+}
+
+.timer-container {
+    width: 100%;
+    padding: 15px;
+    font-weight: 500;
+}
+
+#timer {
+    font-weight: bold;
+}

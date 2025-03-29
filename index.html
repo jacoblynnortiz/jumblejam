@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Awesome Scramble Game!</title>
+
+    <link rel="stylesheet" href="/app/css/globals.css">
+    <link rel="stylesheet" href="/app/css/typography.css">
+
+    <link rel="stylesheet" href="/app/css/home_styles.css">
+</head>
+<body>
+
+    <main class="content">
+        <div class="game-container">
+            <h2 class="game-title">Word Scramble</h2>
+            <h1 id="wordContainer" class="word-container"></h1>
+            <h3 class="timer-container">Time Left: <span id="timer">60s</span></h3>
+            <input type="text" placeholder="Enter a valid word">
+            <button id="RefreshWord">Refresh Word</button>
+            <button id="CheckWord">Check Word</button>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+    
+    <script src="app/js/createGame.js"></script>
+    <script src="app/js/runGame.js"></script>
+    <script src="app/js/main.js"></script>
+</body>
+</html>
