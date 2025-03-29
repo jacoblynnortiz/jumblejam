@@ -16,7 +16,6 @@ function checkWord() {
             UnscrambledWord.value = '';
             
             currentScore = currentScore + 100;
-            scoreContainer.innerText = currentScore;
             
             alert('correct!');
 
