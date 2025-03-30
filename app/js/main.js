@@ -1,11 +1,21 @@
-let gameRunning = true;
+let mainMenu = document.getElementById('mainMenu');
+let playBtn = document.getElementById('playBtn');
 
-let gameOver = document.getElementById('gameOver');
+let restartBtn = document.getElementById('restartBtn');
+let mainMenuBtn = document.getElementById('mainMenuBtn');
 
-setInterval(() => {
-    if(gameRunning) {
-        update();
-    } else {
-        gameOver.style.display = 'flex';
-    }
-}, 500);
+playBtn.addEventListener('click', function() {
+    mainMenu.classList.toggle('hidden');
+
+    startGame();
+});
+
+restartBtn.addEventListener('click', function() {
+    gameOver.classList.toggle('hidden');
+
+    startGame();
+});
+
+mainMenuBtn.addEventListener('click', function() {
+    mainMenu.classList.toggle('hidden');
+});

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,11 +11,25 @@
 
     <link rel="stylesheet" href="/app/css/home_styles.css">
 </head>
+
 <body>
 
-    <div class="game-over" id="gameOver">
+    <div class="game-over hidden" id="gameOver">
         <h2>GAME OVER</h2>
-        <a href="index.html">Restart</a>
+        <h3>Score: <span id="totalScore"></span></h3>
+        <button title="Restart" class="button" name="restart" id="restartBtn">Restart</button>
+        <button title="Main Menu" class="button" name="main menu" id="mainMenuBtn">Main Menu</button>
+    </div>
+
+    <div class="main-menu" id="mainMenu">
+        <div class="main-menu-gradient"></div>
+        <div class="main-menu-content">
+            <h2>JUMBLE JAM</h2>
+            <div class="menu-btns">
+                <button title="Play" class="button" name="play" id="playBtn">Play</button>
+                <button title="Quit" class="button" onclick="window.open('', '_self', ''); window.close();" name="quit">Quit</button>
+            </div>
+        </div>
     </div>
 
     <main class="content">
@@ -24,7 +39,7 @@
             <h2 class="game-title">Jumble Jam</h2>
             <h1 id="wordContainer" class="word-container"></h1>
             <h3 class="timer-container">Time Left: <span id="timer">60s</span></h3>
-            
+
             <div class="user-inputs">
                 <input id="UnscrambledWord" class="unscramble-input" type="text" placeholder="Enter a valid word">
                 <div class="buttons">
@@ -37,7 +52,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
-    
+
     <script src="app/js/createGame.js"></script>
     <script src="app/js/runGame.js"></script>
     <script src="app/js/generateNewWord.js"></script>
@@ -47,4 +62,5 @@
 
     <script src="app/js/main.js"></script>
 </body>
+
 </html>

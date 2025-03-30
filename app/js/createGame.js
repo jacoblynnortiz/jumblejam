@@ -2,9 +2,16 @@ let words;
 let chosenWord;
 let currentScore = 0;
 let currentHighScore;
+let timerCounter;
+let loop;
 
 let defaultTimer = 60;
 let timer = defaultTimer;
+
+let gameRunning = false;
+
+let gameOver = document.getElementById('gameOver');
+let totalScore = document.getElementById('totalScore');
 
 // sets all the sound effects
 
@@ -41,8 +48,22 @@ if (localStorage.getItem('highScore') == null) {
     highScore.innerText = currentHighScore;
 }
 
-pickWord();
-setTimer();
+function startGame() {
+    gameRunning = true;
+    timer = defaultTimer;
+    currentScore = 0;
+
+    themeSong.play();
+
+    gameOver.classList.add('hidden');
+    clearInterval(loop);
+    clearInterval(timerCounter);
+
+    loop = setInterval(gameLoop, 500);
+
+    pickWord();
+    setTimer();
+}
 
 function pickWord() {
 
@@ -89,6 +110,8 @@ function setWord(chosenWord) {
 
     shuffleLetters(letters);
 
+    wordContainer.innerHTML = '';
+
     // creates all the letters seperately and scrambles them
 
     for (let i = 0; i < letters.length; i++) {
@@ -101,39 +124,54 @@ function setWord(chosenWord) {
 }
 
 function setTimer() {
+    timerCounter = setInterval(createTimer, 1000);
+}
 
-    setInterval(() => {
+function createTimer() {
 
-        if(gameRunning == false)
-            return;
+    if(gameRunning == false)
+        return;
+
+    if(timer <= 0) {
+        gameRunning = false;
+
+        dying.pause();
+        dead.play();
+
+    } else if(timer <= 10) {
+        timer--;
+
+        dying.play();
+
+        timerContainer.parentElement.classList.add('times-up');
+
+        timerContainer.innerText = timer + 's';
+    } else {
+        timer--;
+
+        dying.pause();
+
+        timerContainer.parentElement.classList.remove('times-up');
 
         if(timer <= 0) {
-            gameRunning = false;
-
-            dying.pause();
-            dead.play();
-
-        } else if(timer <= 10) {
-            timer--;
-
-            dying.play();
-
             timerContainer.parentElement.classList.add('times-up');
-
-            timerContainer.innerText = timer + 's';
-        } else {
-            timer--;
-
-            dying.pause();
-
-            timerContainer.parentElement.classList.remove('times-up');
-
-            if(timer <= 0) {
-                timerContainer.parentElement.classList.add('times-up');
-                dead.play();
-            }
-
-            timerContainer.innerText = timer + 's';
+            dead.play();
         }
-    }, 1000);
+
+        timerContainer.innerText = timer + 's';
+    }
+}
+
+function gameLoop() {
+    if(gameRunning) {
+        update();
+    } else {
+        if(!gameOver.matches('.hidden')) {
+            return;
+        }else {
+            gameOver.classList.toggle('hidden');
+
+            totalScore.innerText = currentScore;
+        }
+    }
 }
