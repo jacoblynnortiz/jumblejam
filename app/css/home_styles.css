@@ -7,7 +7,7 @@
     opacity: 0;
     transition: .3s;
     display: none;
-    animation: hideAway 3s forwards;
+    animation: hideAway 1s forwards;
 }
 
 @keyframes hideAway {
@@ -28,19 +28,23 @@
 
 .main-menu-gradient {
     position: absolute;
-    top: -1000px;
-    left: -1000px;
-    width: 5000px;
-    min-height: 5000px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100vh;
     z-index: 3;
-    background: linear-gradient(to right bottom, #2d2d6b, #1b9b1d);
-    animation: spinBackground 8s infinite linear;
+    transition: .1s;
+    background-color: rgb(0, 0, 255);
+    animation: animateBackground 6s infinite linear;
 }
 
-@keyframes spinBackground {
-    from {transform: rotate(0deg);}
-
-    to {transform: rotate(360deg);}
+@keyframes animateBackground {
+    0% {background-color: rgb(255, 0, 0);}
+    20% {background-color: rgb(0, 255, 0);}
+    40% {background-color: rgb(0, 0, 255);}
+    60% {background-color: rgb(255, 0, 0);}
+    80% {background-color: rgb(0, 255, 0);}
+    100% {background-color: rgb(0, 0, 255);}
 }
 
 .main-menu-content {
@@ -55,6 +59,7 @@
     align-items: center;
     flex-direction: column;
     background-color: rgba(0, 0, 0, .5);
+    position: relative;
 }
 
 .main-menu h2 {
@@ -63,6 +68,7 @@
     color: #ffffff;
     letter-spacing: 15px;
     margin-bottom: 200px;
+    text-align: center;
 }
 
 .main-menu .menu-btns {
@@ -98,6 +104,223 @@
     box-shadow: 0 5px 25px #000;
 }
 
+.coins-container {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: rgba(0, 0, 0, .3);
+    border-radius: 18px;
+    padding: 5px 15px;
+    z-index: 6;
+    color: #fff;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.coins-container .coin {
+    width: 25px;
+    height: 25px;
+    background-image: url('../../res/images/jumblecoin.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-right: 7.5px;
+}
+
+.coins-container span {
+    margin-right: 5px;
+}
+
+.settings {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100vh;
+    z-index: 6;
+    overflow: hidden;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, .7);
+    padding-top: 100px;
+}
+
+.close-settings {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    width: 45px;
+    height: 45px;
+    color: #fff;
+    font-size: 1.4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.settings-options-container {
+    width: 100%;
+    min-height: 0;
+    max-height: 600px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    overflow-y: hidden;
+}
+
+.settings-options {
+    width: 100%;
+    max-width: 620px;
+    min-height: 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    overflow-y: auto;
+    padding: 0 35px;
+}
+
+.settings-options h3 {
+    width: 100%;
+    text-align: left;
+    font-family: 'game-font', sans-serif;
+    color: #fff;
+    letter-spacing: 4px;
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.settings-options h4 {
+    width: 100%;
+    text-align: left;
+    color: #fff;
+    margin-bottom: 15px;
+    color: #fff;
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+.settings-category {
+    width: 100%;
+    min-height: 100px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    padding-left: 25px;
+    margin-bottom: 25px;
+}
+
+.settings-option {
+    width: 100%;
+    height: 220px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+}
+
+.background-category {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+    margin-left: -7.5px;
+}
+
+.background-category .background {
+    width: 100%;
+    max-width: 150px;
+    height: 100px;
+    margin: 7.5px;
+    border-radius: 12px;
+    cursor: pointer;
+    background-color: grey;
+    transition: .3s;
+    outline: none;
+    border: none;
+    position: relative;
+}
+
+.background-category .background:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 10px #000;
+}
+
+.background-category .background .active-indicator {
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: gold;
+    border-radius: 50%;
+    color: #333;
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    display: none;
+}
+
+.background-category .background .active-indicator.active {
+    display: flex;
+}
+
+.settings-option label {
+    margin-right: 35px;
+}
+
+.settings-option input[type='range'] {
+    width: 100%;
+    max-width: 300px;
+    height: 10px;
+    -webkit-appearance: none;
+    background-color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.settings-option input[type='range']::-webkit-slider-runnable-track {
+    height: 10px;
+    -webkit-appearance: none;
+    color: #fff;
+    margin-top: -1px;
+  }
+  
+  .settings-option input[type='range']::-webkit-slider-thumb {
+    width: 15px;
+    -webkit-appearance: none;
+    height: 15px;
+    border-radius: 50%;
+    cursor: ew-resize;
+    background: #157716;
+    margin-bottom: 3px;
+    box-shadow: -307.5px 0 0 300px #1b9b1d;
+    margin: -2px;
+    margin-left: 0;
+  }
+
+.settings h2 {
+    font-size: 5rem;
+    font-family: 'game-font', sans-serif;
+    color: #ffffff;
+    letter-spacing: 15px;
+    margin-bottom: 50px;
+}
+
 .game-over {
     position: absolute;
     top: 0;
@@ -118,6 +341,7 @@
     color: #ffffff;
     letter-spacing: 15px;
     margin-bottom: 20px;
+    text-align: center;
 }
 
 .game-over h3 {
@@ -171,6 +395,7 @@
     padding: 15px;
     font-family: 'game-font', sans-serif;
     letter-spacing: 5px;
+    text-align: center;
 }
 
 .word-container {
@@ -261,7 +486,6 @@
     letter-spacing: 5px;
 }
 
-.high-score {
-    left: unset;
-    right: 15px;
+.score {
+    top: 55px;
 }

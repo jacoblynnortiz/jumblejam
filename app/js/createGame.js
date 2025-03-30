@@ -2,6 +2,7 @@ let words;
 let chosenWord;
 let currentScore = 0;
 let currentHighScore;
+let currentCoins;
 let timerCounter;
 let loop;
 
@@ -9,6 +10,13 @@ let defaultTimer = 60;
 let timer = defaultTimer;
 
 let gameRunning = false;
+
+let defaultCoinsAmount = 0;
+
+let coinsAmmount = document.getElementById('coinsAmmount');
+
+currentCoins = defaultCoinsAmount;
+coinsAmmount.innerText = currentCoins;
 
 let gameOver = document.getElementById('gameOver');
 let totalScore = document.getElementById('totalScore');
@@ -29,7 +37,16 @@ themeSong.addEventListener('ended', function() {
     themeSong.play();
 });
 
-themeSong.play();
+document.addEventListener('click', () => {
+    themeSong.play()
+      .then(() => {
+        // Audio started playing successfully
+      })
+      .catch(error => {
+        console.error('Failed to play audio:', error);
+        // Handle the error appropriately, e.g., display a message to the user
+      });
+  }, { once: true }); // Ensures the event listener is only triggered once
 
 let highScore = document.getElementById('highScore');
 
@@ -52,8 +69,6 @@ function startGame() {
     gameRunning = true;
     timer = defaultTimer;
     currentScore = 0;
-
-    themeSong.play();
 
     gameOver.classList.add('hidden');
     clearInterval(loop);
@@ -172,6 +187,21 @@ function gameLoop() {
             gameOver.classList.toggle('hidden');
 
             totalScore.innerText = currentScore;
+
+            calculateEarnedCoins();
+
+            coinsAmmount.innerText = currentCoins;
         }
     }
+}
+
+function calculateEarnedCoins() {
+    let newCoin = Math.floor(currentScore / 500);
+
+    if(newCoin < 0)
+        newCoin = 0;
+
+    currentCoins = currentCoins + newCoin;
+
+    console.log(newCoin)
 }

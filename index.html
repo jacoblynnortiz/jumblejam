@@ -21,20 +21,55 @@
         <button title="Main Menu" class="button" name="main menu" id="mainMenuBtn">Main Menu</button>
     </div>
 
+    <div class="settings hidden" id="settingsMenu">
+        <button title="Main Menu" name="back to main menu" id="closeSettings" class="close-settings"><i
+                class="fa-solid fa-arrow-left"></i></button>
+        <h2>Settings</h2>
+        <div class="settings-options-container">
+            <div class="settings-options">
+                <h3>Volume</h3>
+                <div class="settings-category">
+                    <div class="settings-option">
+                        <label for="mainVolume">Master</label>
+                        <input type="range" id="mainVolume" name="volume" min="0" max="100" value="50">
+                    </div>
+                    <div class="settings-option">
+                        <label for="musicVolume">Music</label>
+                        <input type="range" id="musicVolume" name="volume" min="0" max="100" value="50">
+                    </div>
+                    <div class="settings-option">
+                        <label for="soundEffectsVolume">Sound Effects</label>
+                        <input type="range" id="soundEffectsVolume" name="volume" min="0" max="100" value="50">
+                    </div>
+                </div>
+                <h3>Background</h3>
+                <div class="settings-category">
+                    <h4>Solid</h4>
+                    <div class="background-category" id="solidBackgrounds"></div>
+                    <h4>Linear</h4>
+                    <div class="background-category" id="linearBackgrounds"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="main-menu" id="mainMenu">
         <div class="main-menu-gradient"></div>
         <div class="main-menu-content">
             <h2>JUMBLE JAM</h2>
             <div class="menu-btns">
                 <button title="Play" class="button" name="play" id="playBtn">Play</button>
-                <button title="Quit" class="button" onclick="window.open('', '_self', ''); window.close();" name="quit">Quit</button>
+                <button title="Settings" class="button" name="settings" id="settingsBtn">Settings</button>
+                <button title="Quit" class="button" onclick="window.open('', '_self', ''); window.close();"
+                    name="quit">Quit</button>
             </div>
         </div>
     </div>
 
-    <main class="content">
+    <main class="content" id="game">
         <h3 class="score">Score: <span id="score">0</span></h3>
         <h3 class="high-score">High Score: <span id="highScore">0</span></h3>
+        <div class="coins-container"><div class="coin"></div> <span id="coinsAmmount">0</span> coins</div>
         <div class="game-container">
             <h2 class="game-title">Jumble Jam</h2>
             <h1 id="wordContainer" class="word-container"></h1>
@@ -60,6 +95,7 @@
     <script src="app/js/checkWord.js"></script>
     <script src="app/js/refreshWord.js"></script>
 
+    <script src="app/js/settings.js"></script>
     <script src="app/js/main.js"></script>
 </body>
 
