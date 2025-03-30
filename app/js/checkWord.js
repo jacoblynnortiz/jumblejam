@@ -16,12 +16,31 @@ function checkWord() {
             UnscrambledWord.value = '';
             
             currentScore = currentScore + 100;
-            
-            alert('correct!');
 
-            pickNewWord();
+            correctSound.play();
+
+            setTimeout(() => {
+                timer = defaultTimer + 0;
+
+                pickNewWord();
+            }, 1500);
         } else {
-            alert('wrong!');
+            UnscrambledWord.value = '';
+
+            incorrectSound.play();
+
+            if (timer <= 10) {
+                currentScore = currentScore - 20;
+            } else {
+                timer = timer - 10;
+                currentScore = currentScore - 20;
+            }
+
+            timerContainer.parentElement.classList.add('times-up');
+
+            setTimeout(() => {
+                timerContainer.parentElement.classList.remove('times-up');
+            }, 1500);
         }
     } else {
         return;

@@ -43,9 +43,7 @@ function setNewWord(chosenWord) {
 
     shuffleNewLetters(letters);
 
-    for (let i = 0; i < wordContainer.children.length; i++) {
-        wordContainer.children[i].remove();
-    }
+    wordContainer.innerHTML = '';
 
     // creates all the letters seperately and scrambles them
 

@@ -1,10 +1,45 @@
 let words;
 let chosenWord;
 let currentScore = 0;
+let currentHighScore;
+
+let defaultTimer = 60;
+let timer = defaultTimer;
+
+// sets all the sound effects
+
+let correctSound = new Audio('res/sounds/correct.mp3');
+let incorrectSound = new Audio('res/sounds/incorrect.mp3');
+let dying = new Audio('res/sounds/dying.mp3');
+let dead = new Audio('res/sounds/dead.mp3');
+
+// sets the theme song
+
+let themeSong = new Audio('res/sounds/themeSong.wav');
+
+themeSong.addEventListener('ended', function() {
+    themeSong.currentTime = 0;
+    themeSong.play();
+});
+
+themeSong.play();
+
+let highScore = document.getElementById('highScore');
 
 let wordContainer = document.getElementById('wordContainer');
 
 let timerContainer = document.getElementById('timer');
+
+highScore.innerText = localStorage.getItem('highScore');
+
+if (localStorage.getItem('highScore') == null) {
+    localStorage.setItem('highScore', 0);
+    currentHighScore = localStorage.getItem('highScore');
+    highScore.innerText = currentHighScore;
+} else {
+    currentHighScore = localStorage.getItem('highScore');
+    highScore.innerText = currentHighScore;
+}
 
 pickWord();
 setTimer();
@@ -66,16 +101,37 @@ function setWord(chosenWord) {
 }
 
 function setTimer() {
-    let timer = 60;
 
     setInterval(() => {
+
+        if(gameRunning == false)
+            return;
+
         if(timer <= 0) {
             gameRunning = false;
+
+            dying.pause();
+            dead.play();
+
+        } else if(timer <= 10) {
+            timer--;
+
+            dying.play();
+
+            timerContainer.parentElement.classList.add('times-up');
+
+            timerContainer.innerText = timer + 's';
         } else {
             timer--;
 
-            if(timer <= 0)
+            dying.pause();
+
+            timerContainer.parentElement.classList.remove('times-up');
+
+            if(timer <= 0) {
                 timerContainer.parentElement.classList.add('times-up');
+                dead.play();
+            }
 
             timerContainer.innerText = timer + 's';
         }

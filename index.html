@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Awesome Scramble Game!</title>
+    <title>Jumble Jam</title>
 
     <link rel="stylesheet" href="/app/css/globals.css">
     <link rel="stylesheet" href="/app/css/typography.css">
@@ -12,10 +12,16 @@
 </head>
 <body>
 
+    <div class="game-over" id="gameOver">
+        <h2>GAME OVER</h2>
+        <a href="index.html">Restart</a>
+    </div>
+
     <main class="content">
         <h3 class="score">Score: <span id="score">0</span></h3>
+        <h3 class="high-score">High Score: <span id="highScore">0</span></h3>
         <div class="game-container">
-            <h2 class="game-title">Word Scramble</h2>
+            <h2 class="game-title">Jumble Jam</h2>
             <h1 id="wordContainer" class="word-container"></h1>
             <h3 class="timer-container">Time Left: <span id="timer">60s</span></h3>
             
