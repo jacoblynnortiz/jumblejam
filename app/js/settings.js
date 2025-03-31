@@ -150,10 +150,11 @@ function updateSettings() {
 
 function setMainVolume() {
     themeSong.volume = musicVolume.value / 100 * mainVolume.value / 100;
-    dead.volume = musicVolume.value / 100 * mainVolume.value / 100;
-    dying.volume = musicVolume.value / 100 * mainVolume.value / 100;
-    correctSound.volume = musicVolume.value / 100 * mainVolume.value / 100;
-    incorrectSound.volume = musicVolume.value / 100 * mainVolume.value / 100;
+    dead.volume = soundEffectsVolume.value / 100 * mainVolume.value / 100;
+    dying.volume = soundEffectsVolume.value / 100 * mainVolume.value / 100;
+    correctSound.volume = soundEffectsVolume.value / 100 * mainVolume.value / 100;
+    incorrectSound.volume = soundEffectsVolume.value / 100 * mainVolume.value / 100;
+    levelUp.volume = soundEffectsVolume.value / 100 * mainVolume.value / 100;
 }
 
 function setSoundEffectsVolume() {
@@ -161,6 +162,7 @@ function setSoundEffectsVolume() {
     dying.volume = soundEffectsVolume.value / 100;
     correctSound.volume = soundEffectsVolume.value / 100;
     incorrectSound.volume = soundEffectsVolume.value / 100;
+    levelUp.volume = soundEffectsVolume.value / 100;
 }
 
 function changeBackgroundSolid(i) {

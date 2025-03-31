@@ -1,24 +1,61 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    line-height: 1.4;
-    list-style: none;
-    text-decoration: none;
-    font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  line-height: 1.4;
+  list-style: none;
+  text-decoration: none;
+  font-family: sans-serif;
 }
 
 body {
-    background-color: #000;
+  background-color: #000;
 }
 
 .content {
-    width: 100%;
-    max-width: 1920px;
-    margin: 0 auto;
-    min-height: 100vh;
-    background: linear-gradient(to right, #2d2d6b, #1b9b1d);
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* animate closing menus, fade out and disapear */
+
+.hidden {
+  opacity: 0;
+  transition: 0.3s;
+  display: none;
+  animation: hideAway 1s forwards;
+}
+
+@keyframes hideAway {
+  from {
     display: flex;
-    justify-content: center;
-    align-items: center;
+  }
+
+  to {
+    display: none;
+  }
+}
+
+/* Jumble Jam themed scrollbars */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #333;
+  border-radius: 8px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #131313;
+  border-radius: 8px;
 }

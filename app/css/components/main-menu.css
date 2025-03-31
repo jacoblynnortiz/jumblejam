@@ -1,0 +1,62 @@
+.main-menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100vh;
+    z-index: 4;
+    overflow: hidden;
+}
+
+.main-menu-content-wrapper {
+    position: relative;
+}
+
+.main-menu video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100vh;
+    z-index: -100;
+}
+
+.main-menu-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100vh;
+    z-index: 4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, .5);
+    position: relative;
+}
+
+.main-menu h2 {
+    font-size: 8rem;
+    font-family: 'game-font', sans-serif;
+    color: #ffffff;
+    letter-spacing: 15px;
+    margin-bottom: 200px;
+    text-align: center;
+}
+
+.main-menu .menu-btns {
+    width: 100%;
+    max-width: 500px;
+    min-height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 1300px) {
+    .main-menu h2 {
+        font-size: 5rem;
+    }
+}

@@ -6,5 +6,5 @@ function refresh() {
 
     currentScore = currentScore - 5;
 
-    pickNewWord();
+    pickWord();
 }

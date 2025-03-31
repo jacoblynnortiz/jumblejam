@@ -1,4 +1,7 @@
-function pickNewWord() {
+function pickWord() {
+
+    UnscrambledWord.value = '';
+    UnscrambledWord.focus();
 
     $.getJSON('app/js/words.json', function (response) {
         words = response;
@@ -16,32 +19,34 @@ function pickNewWord() {
         let chosenWordRaw = words[randWordIndex];
         chosenWord = chosenWordRaw.toUpperCase(1);
 
-        setNewWord(chosenWord);
+        setWord(chosenWord);
     });
 }
 
 // this function shuffles the letters to make the game cool
 
-function shuffleNewLetters(array) {
-  let currentIndex = array.length;
+// this function shuffles the letters to make the game cool
 
-  // While there remain elements to shuffle...
-  while (currentIndex != 0) {
+function shuffleLetters(array) {
+    let currentIndex = array.length;
 
-    // Pick a remaining element...
-    let randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
+    // While there remain elements to shuffle...
+    while (currentIndex != 0) {
 
-    // And swap it with the current element.
-    [array[currentIndex], array[randomIndex]] = [
-      array[randomIndex], array[currentIndex]];
-  }
+        // Pick a remaining element...
+        let randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        // And swap it with the current element.
+        [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex], array[currentIndex]];
+    }
 }
 
-function setNewWord(chosenWord) {
+function setWord(chosenWord) {
     let letters = chosenWord.split("");
 
-    shuffleNewLetters(letters);
+    shuffleLetters(letters);
 
     wordContainer.innerHTML = '';
 
@@ -51,7 +56,7 @@ function setNewWord(chosenWord) {
         let letter = document.createElement('span');
 
         letter.innerText = letters[i];
-        
+
         wordContainer.appendChild(letter);
     }
 }

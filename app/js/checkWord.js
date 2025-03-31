@@ -19,10 +19,17 @@ function checkWord() {
 
             correctSound.play();
 
+            generateConfetti();
+
             setTimeout(() => {
                 timer = defaultTimer + 0;
 
-                pickNewWord();
+                timerBarWidth = 100;
+                timerBar.style.width = timerBarWidth + '%';
+
+                addXP();
+
+                pickWord();
             }, 1500);
         } else {
             UnscrambledWord.value = '';
@@ -33,6 +40,10 @@ function checkWord() {
                 currentScore = currentScore - 20;
             } else {
                 timer = timer - 10;
+
+                timerBarWidth = timerBarWidth - 1.66666667 * 10;
+                timerBar.style.width = timerBarWidth + '%';
+
                 currentScore = currentScore - 20;
             }
 

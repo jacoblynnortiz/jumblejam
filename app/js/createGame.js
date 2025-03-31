@@ -4,6 +4,7 @@ let currentScore = 0;
 let currentHighScore;
 let currentCoins;
 let timerCounter;
+let timerBarWidth;
 let loop;
 
 let defaultTimer = 60;
@@ -18,13 +19,13 @@ let coinsAmmount = document.getElementById('coinsAmmount');
 currentCoins = defaultCoinsAmount;
 coinsAmmount.innerText = currentCoins;
 
-let gameOver = document.getElementById('gameOver');
 let totalScore = document.getElementById('totalScore');
 
 // sets all the sound effects
 
 let correctSound = new Audio('res/sounds/correct.mp3');
 let incorrectSound = new Audio('res/sounds/incorrect.mp3');
+let levelUp = new Audio('res/sounds/levelUp.mp3');
 let dying = new Audio('res/sounds/dying.mp3');
 let dead = new Audio('res/sounds/dead.mp3');
 
@@ -53,6 +54,7 @@ let highScore = document.getElementById('highScore');
 let wordContainer = document.getElementById('wordContainer');
 
 let timerContainer = document.getElementById('timer');
+let timerBar = document.getElementById('timerBar');
 
 highScore.innerText = localStorage.getItem('highScore');
 
@@ -65,10 +67,23 @@ if (localStorage.getItem('highScore') == null) {
     highScore.innerText = currentHighScore;
 }
 
+if (localStorage.getItem('coins') == null) {
+    localStorage.setItem('coins', 0);
+    currentCoins = localStorage.getItem('coins');
+    coinsAmmount.innerText = currentCoins;
+} else {
+    currentCoins = localStorage.getItem('coins');
+    coinsAmmount.innerText = currentCoins;
+}
+
 function startGame() {
     gameRunning = true;
     timer = defaultTimer;
     currentScore = 0;
+    UnscrambledWord.disabled = false;
+    checkBtn.disabled = false;
+    refreshWord.disabled = false;
+    timerBarWidth = 100;
 
     gameOver.classList.add('hidden');
     clearInterval(loop);
@@ -78,64 +93,6 @@ function startGame() {
 
     pickWord();
     setTimer();
-}
-
-function pickWord() {
-
-    $.getJSON('app/js/words.json', function (response) {
-        words = response;
-
-        // this loops through to find out how many words are available
-
-        let wordsAvailable;
-
-        for (let i = 0; i < words.length; i++) {
-            wordsAvailable = i;
-        }
-
-        let randWordIndex = Math.floor(Math.random() * wordsAvailable);
-
-        let chosenWordRaw = words[randWordIndex];
-        chosenWord = chosenWordRaw.toUpperCase(1);
-
-        setWord(chosenWord);
-    });
-}
-
-// this function shuffles the letters to make the game cool
-
-function shuffleLetters(array) {
-  let currentIndex = array.length;
-
-  // While there remain elements to shuffle...
-  while (currentIndex != 0) {
-
-    // Pick a remaining element...
-    let randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
-
-    // And swap it with the current element.
-    [array[currentIndex], array[randomIndex]] = [
-      array[randomIndex], array[currentIndex]];
-  }
-}
-
-function setWord(chosenWord) {
-    let letters = chosenWord.split("");
-
-    shuffleLetters(letters);
-
-    wordContainer.innerHTML = '';
-
-    // creates all the letters seperately and scrambles them
-
-    for (let i = 0; i < letters.length; i++) {
-        let letter = document.createElement('span');
-
-        letter.innerText = letters[i];
-        
-        wordContainer.appendChild(letter);
-    }
 }
 
 function setTimer() {
@@ -155,6 +112,8 @@ function createTimer() {
 
     } else if(timer <= 10) {
         timer--;
+        timerBarWidth = timerBarWidth - 1.66666667;
+        timerBar.style.width = timerBarWidth + '%';
 
         dying.play();
 
@@ -163,6 +122,8 @@ function createTimer() {
         timerContainer.innerText = timer + 's';
     } else {
         timer--;
+        timerBarWidth = timerBarWidth - 1.66666667;
+        timerBar.style.width = timerBarWidth + '%';
 
         dying.pause();
 
@@ -186,13 +147,25 @@ function gameLoop() {
         }else {
             gameOver.classList.toggle('hidden');
 
+            UnscrambledWord.value = '';
+            UnscrambledWord.disabled = true;
+            checkBtn.disabled = true;
+            refreshWord.disabled = true;
+
             totalScore.innerText = currentScore;
 
             calculateEarnedCoins();
 
             coinsAmmount.innerText = currentCoins;
+
+            if(currentCoins != localStorage.getItem('coins'))
+                localStorage.setItem('coins', currentCoins);
         }
     }
+}
+
+function update() {
+    updateScore();
 }
 
 function calculateEarnedCoins() {
@@ -201,7 +174,5 @@ function calculateEarnedCoins() {
     if(newCoin < 0)
         newCoin = 0;
 
-    currentCoins = currentCoins + newCoin;
-
-    console.log(newCoin)
+    currentCoins = parseInt(currentCoins) + parseInt(newCoin);
 }
