@@ -52,6 +52,7 @@ function loadLevel() {
 
 setInterval(() => {
     loadLevel();
+    unlockContent();
 }, 500)
 
 function addXP() {

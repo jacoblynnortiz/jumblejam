@@ -13,6 +13,7 @@
 
     <link rel="stylesheet" href="/app/css/components/main-menu.css">
     <link rel="stylesheet" href="/app/css/components/settings-menu.css">
+    <link rel="stylesheet" href="/app/css/components/paused-menu.css">
     <link rel="stylesheet" href="/app/css/components/game-over.css">
     <link rel="stylesheet" href="/app/css/components/button.css">
     <link rel="stylesheet" href="/app/css/components/timer.css">
@@ -23,6 +24,9 @@
 <body>
     <!-- GAME OVER SCREEN -->
     <div class="game-over hidden" id="gameOver"></div>
+
+    <!-- PAUSED SCREEN -->
+    <div class="paused-menu hidden" id="pausedMenu"></div>
 
     <!-- SETTINGS MENU -->
     <div class="settings hidden" id="settingsMenu"></div>
@@ -60,6 +64,7 @@
     <!-- generates all menus -->
     <script src="app/js/components/mainMenu.js"></script>
     <script src="app/js/components/settingsMenu.js"></script>
+    <script src="app/js/components/pausedMenu.js"></script>
     <script src="app/js/components/gameOver.js"></script>
 
     <!-- sets variables for all the menus and buttons -->
@@ -69,6 +74,7 @@
 
     <script src="app/js/createGame.js"></script>
     <script src="app/js/generateWord.js"></script>
+    <script src="app/js/pause.js"></script>
     <script src="app/js/scoreTracker.js"></script>
     <script src="app/js/checkWord.js"></script>
     <script src="app/js/refreshWord.js"></script>

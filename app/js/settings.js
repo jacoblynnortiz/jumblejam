@@ -23,7 +23,13 @@ let backgrounds = [
             "linear-gradient(to bottom, blue, red)",
             "linear-gradient(to bottom, red, orange)",
             "linear-gradient(to bottom, pink, purple)",
-            "linear-gradient(to bottom, purple, navy)"
+            "linear-gradient(to bottom, purple, navy)",
+        ],
+        "radial": [
+            "radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 49%, rgba(0,212,255,1) 100%)",
+            "radial-gradient(circle, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%)",
+            "radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%)",
+            "radial-gradient(circle, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%)",
         ],
     }
 ];
@@ -32,6 +38,7 @@ let backgrounds = [
 
 let solidBackgrounds = document.getElementById('solidBackgrounds');
 let linearBackgrounds = document.getElementById('linearBackgrounds');
+let radialBackgrounds = document.getElementById('radialBackgrounds');
 
 for (let i = 0; i < backgrounds[0].solid.length; i++) {
     let backgroundOption = document.createElement('button');
@@ -77,6 +84,28 @@ for (let i = 0; i < backgrounds[0].linear.length; i++) {
     linearBackgrounds.appendChild(backgroundOption);
 }
 
+for (let i = 0; i < backgrounds[0].radial.length; i++) {
+    let backgroundOption = document.createElement('button');
+    let backgroundActiveContainer = document.createElement('div');
+    let backgroundActiveIcon = document.createElement('i');
+
+    backgroundOption.classList.add('background');
+
+    backgroundOption.style.background = backgrounds[0].radial[i];
+
+    backgroundOption.setAttribute('onclick', 'changeBackgroundRadial(' + i + ');');
+
+    backgroundOption.id = 'backgroundRadial' + i;
+
+    backgroundActiveContainer.classList.add('active-indicator');
+    backgroundActiveIcon.classList.add('fa-solid');
+    backgroundActiveIcon.classList.add('fa-check');
+
+    backgroundActiveContainer.appendChild(backgroundActiveIcon);
+    backgroundOption.appendChild(backgroundActiveContainer);
+    radialBackgrounds.appendChild(backgroundOption);
+}
+
 // loads users perferred settings
 
 if (localStorage.getItem('settings') == null) {
@@ -97,6 +126,34 @@ if (localStorage.getItem('settings') == null) {
     soundEffectsVolume.value = userSettings[0].volume.soundFX;
 }
 
+// hides current unlocked content
+
+let contentBlockSolidBG = document.getElementById('contentBlockSolidBG');
+let contentBlockLinearBG = document.getElementById('contentBlockLinearBG');
+let contentBlockRadialBG = document.getElementById('contentBlockRadialBG');
+
+let requiredLevels = [
+    {
+        "solidBackgrounds": 5,
+        "linearBackgrounds": 10,
+        "radialBackgrounds": 15
+    }
+];
+
+function unlockContent() {
+    if (userLevel[0].levelName >= requiredLevels[0].solidBackgrounds) {
+        contentBlockSolidBG.style.display = 'none';
+    } else { contentBlockSolidBG.style.display = 'flex'; }
+    
+    if (userLevel[0].levelName >= requiredLevels[0].linearBackgrounds) {
+        contentBlockLinearBG.style.display = 'none';
+    } else { contentBlockLinearBG.style.display = 'flex'; }
+
+    if (userLevel[0].levelName >= requiredLevels[0].radialBackgrounds) {
+        contentBlockRadialBG.style.display = 'none';
+    } else { contentBlockRadialBG.style.display = 'flex'; }
+}
+
 // sets perferred background to active background
 game.style.background = userSettings[0].background;
 
@@ -114,6 +171,12 @@ for (let i = 0; i < backgrounds[0].linear.length; i++) {
     }
 }
 
+for (let i = 0; i < backgrounds[0].radial.length; i++) {
+    if(backgrounds[0].radial[i] == userSettings[0].background) {
+        perferredBackgroundIndex = i;
+    }
+}
+
 let firstLetterOfColor = userSettings[0].background.split("");
 
 // this indicates the perferred color is solid
@@ -123,6 +186,10 @@ if(firstLetterOfColor[0] == '#')
 // this indicates the perferred color is linear
 if(firstLetterOfColor[0] == 'l')
     document.getElementById('backgroundLinear' + perferredBackgroundIndex).children[0].classList.add('active');
+
+// this indicates the perferred color is radial
+if(firstLetterOfColor[0] == 'r')
+    document.getElementById('backgroundRadial' + perferredBackgroundIndex).children[0].classList.add('active');
 
 
 function updateSettings() {
@@ -176,6 +243,7 @@ function changeBackgroundSolid(i) {
 
     let allSolidBackgrounds = solidBackgrounds.querySelectorAll("div");
     let allLinearBackgrounds = linearBackgrounds.querySelectorAll("div");
+    let allRadialBackgrounds = radialBackgrounds.querySelectorAll("div");
 
     for (let bg = 0; bg < allSolidBackgrounds.length; bg++) {
         allSolidBackgrounds[bg].classList.remove('active');
@@ -183,6 +251,10 @@ function changeBackgroundSolid(i) {
 
     for (let bg = 0; bg < allLinearBackgrounds.length; bg++) {
         allLinearBackgrounds[bg].classList.remove('active');
+    }
+
+    for (let bg = 0; bg < allRadialBackgrounds.length; bg++) {
+        allRadialBackgrounds[bg].classList.remove('active');
     }
 
     activeBackground.children[0].classList.add('active');
@@ -199,6 +271,7 @@ function changeBackgroundLinear(i) {
 
     let allSolidBackgrounds = solidBackgrounds.querySelectorAll("div");
     let allLinearBackgrounds = linearBackgrounds.querySelectorAll("div");
+    let allRadialBackgrounds = radialBackgrounds.querySelectorAll("div");
 
     for (let bg = 0; bg < allSolidBackgrounds.length; bg++) {
         allSolidBackgrounds[bg].classList.remove('active');
@@ -206,6 +279,38 @@ function changeBackgroundLinear(i) {
 
     for (let bg = 0; bg < allLinearBackgrounds.length; bg++) {
         allLinearBackgrounds[bg].classList.remove('active');
+    }
+
+    for (let bg = 0; bg < allRadialBackgrounds.length; bg++) {
+        allRadialBackgrounds[bg].classList.remove('active');
+    }
+
+    activeBackground.children[0].classList.add('active');
+}
+
+function changeBackgroundRadial(i) {
+    let game = document.getElementById('game');
+
+    game.style.background = backgrounds[0].radial[i];
+
+    userSettings[0].background = backgrounds[0].radial[i];
+
+    let activeBackground = document.getElementById('backgroundRadial' + i);
+
+    let allSolidBackgrounds = solidBackgrounds.querySelectorAll("div");
+    let allLinearBackgrounds = linearBackgrounds.querySelectorAll("div");
+    let allRadialBackgrounds = radialBackgrounds.querySelectorAll("div");
+
+    for (let bg = 0; bg < allSolidBackgrounds.length; bg++) {
+        allSolidBackgrounds[bg].classList.remove('active');
+    }
+
+    for (let bg = 0; bg < allLinearBackgrounds.length; bg++) {
+        allLinearBackgrounds[bg].classList.remove('active');
+    }
+
+    for (let bg = 0; bg < allRadialBackgrounds.length; bg++) {
+        allRadialBackgrounds[bg].classList.remove('active');
     }
 
     activeBackground.children[0].classList.add('active');

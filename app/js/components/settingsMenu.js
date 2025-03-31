@@ -22,10 +22,21 @@ settingsMenu.innerHTML = `
                 </div>
                 <h3>Background</h3>
                 <div class="settings-category">
-                    <h4>Solid</h4>
-                    <div class="background-category" id="solidBackgrounds"></div>
-                    <h4>Linear</h4>
-                    <div class="background-category" id="linearBackgrounds"></div>
+                    <div class="category-container">
+                        <div id="contentBlockSolidBG" class="content-block" data-unlockrequirement="Reach Level 5 to unlock"><div class="lock"></div></div>
+                        <h4>Solid</h4>
+                        <div class="background-category" id="solidBackgrounds"></div>
+                    </div>
+                    <div class="category-container">
+                        <div id="contentBlockLinearBG" class="content-block" data-unlockrequirement="Reach Level 10 to unlock"><div class="lock"></div></div>
+                        <h4>Linear</h4>
+                        <div class="background-category" id="linearBackgrounds"></div>
+                    </div>
+                    <div class="category-container">
+                        <div id="contentBlockRadialBG" class="content-block" data-unlockrequirement="Reach Level 15 to unlock"><div class="lock"></div></div>
+                        <h4>Radial</h4>
+                        <div class="background-category" id="radialBackgrounds"></div>
+                    </div>
                 </div>
             </div>
         </div>

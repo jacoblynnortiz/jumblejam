@@ -11,6 +11,7 @@ let defaultTimer = 60;
 let timer = defaultTimer;
 
 let gameRunning = false;
+let gamePaused = false;
 
 let defaultCoinsAmount = 0;
 
